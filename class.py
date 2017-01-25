@@ -17,18 +17,24 @@ class c1(object):
     def __init__(self,name,num):
         self.__name=name
         self.__num=num
-        self.__other="other"
         #实例属性
 
     def print_(self):
         print(self.__name,self.__num)
     def print1_(self):
-        print(self.__other)
+
+        print(self.__name)
 class c2(c1):
     __slots__=('one','iii')
+    cls_var='ff'
+    def __new__(cls,name,num,other):
+        print("new called")
+        return super(c2,cls).__new__(cls)
+
     def __init__(self,name,num,other):
-        self.__name=name
-        self.__num=num
+        super(c2,self).__init__(self)
+        self.name=name
+        self.num=num
         self.__other=other
 
 def other_func(self):
@@ -50,7 +56,7 @@ print(ex.sum)
 
 ex2=c2("c2",40,"fji")
 #ex2 define
-print(ex2.name)
+#print(ex2.name)
 print (dir(ex2))
 print (hasattr(ex,'name'))
 print(ex._c1__name)

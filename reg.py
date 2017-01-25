@@ -48,3 +48,4 @@ recom=re.compile(r'aaa')
 recom.match('fjijf')
 #不需要第一个参数,编译后
 
+print("123".replace('1','2'))

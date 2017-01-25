@@ -15,16 +15,20 @@ def server():
         t.start()
 
 def tcplink(sock_accept,addr):
+    try:
 
-    sock_accept.send(b'hello')
+        sock_accept.send(b'hello')
 
-    print(threading.current_thread().name,"start")
-    while True:
-        date=sock_accept.recv(1024)
-        if not date or date.decode('utf-8')=='exit':
-            break
-        print("rec",date.decode('utf-8'))
-    print(threading.current_thread().name,"end")
+        print(threading.current_thread().name,"start")
+        while True:
+            date=sock_accept.recv(1024)
+            if not date or date.decode('utf-8')=='exit':
+                break
+            print(date)
+            print("rec",date.decode('utf-8'))
+        print(threading.current_thread().name,"end")
+    except:
+        print("error")
     
 server()
 
