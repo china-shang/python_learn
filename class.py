@@ -10,7 +10,7 @@ class c1(object):
     def sum(self):
         return self._sum
 
-    @sum.setter
+    @sum.setter 
     def sum(self,n):
         self._sum=n
 
@@ -32,15 +32,15 @@ class c2(c1):
         return super(c2,cls).__new__(cls)
 
     def __init__(self,name,num,other):
-        super(c2,self).__init__(self)
+        #super(c2,self).__init__(self)
         self.name=name
         self.num=num
         self.__other=other
 
-def other_func(self):
+def otherff(self):
     print("new func in runing add")
 
-c1.other_func=other_func
+c1.other_func=otherff
 #函数附加到类
 ex=c1("c1",20)
 ex.__name="c2"
@@ -49,7 +49,7 @@ ex.print1_()
 ex.other_func()
 print(hasattr(ex,'__slots__'))
 print(ex.onlyread)
-ex.sum=-3
+eij=-3
 ex.sum=45
 print(ex.sum)
 
@@ -68,25 +68,40 @@ ex2.otherf=MethodType(otherf,ex2)
 #函数附加至实例
 ex2.otherf()
 ex2.new=3
-from enum import Enum,unique
+from enum import Enum
+import urllib
+urllib.request.Request.add_header
 
 
 theday=Enum('weekday',('nn','fjf','jidf'))
 print(theday)
 var=theday.nn
 print(var)
+class A(object):
+    def __init__(self,data):
+        self.data=data
 
+class B(A):
+    def __init__(self,data):
+        A.__init__(self,data)
 
+    def Print(self):
+        print(self.data)
 
-
-
-
-
-
-
-
-
-
+b=B("34")
+b.Print()
+class A(object):
+    pass
+class Bjfi(A):
+    def __new__(cls):
+        return object.__new__(cls)
+    def __init__(self):
+        self.data="data"
+        pass
+    def Print(self):
+        print(self.data)
+IJ=B()
+b.Print()
 
 
 

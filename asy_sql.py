@@ -4,15 +4,19 @@ import asyncio
 import aiomysql
 loop=asyncio.get_event_loop()
 async def creat_pool(loop):
-    async with aiomysql.create_pool(
+    global pool
+    pool=await aiomysql.create_pool(
         host='127.0.0.1',port=3306,
         password='',user='root',
-        db='base1',loop=loop) as pool:
-        async with pool.get() as con:
-            async with con.cursor() as cur:
-                await cur.execute("selecT name FROM students")
-                #print(cur.description)
-                r=await cur.fetchall()
-                print(r)
+        db='base1',loop=loop) 
+async def select():
+    global pool
+    async with pool as con:
+        async with con.cursor(aiomysql.DictCursor) as cur:
+            await cur.execute("selecT name FROM students")
+            await cur.commit()
+            #print(cur.description)
+            r=await cur.fetchall()
+    return r
 
 loop.run_until_complete(creat_pool(loop))

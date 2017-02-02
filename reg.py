@@ -43,9 +43,9 @@ print(var2.group(1))
 #贪婪也不会吧3全匹配，后面也是不定个数才会全部匹配
 var2=re.match(r'(\d+?)(33)','33334')
 print(var2.group(1))
+fjifj()
 #加？后尽可能匹配更少
 recom=re.compile(r'aaa')
 recom.match('fjijf')
 #不需要第一个参数,编译后
-
 print("123".replace('1','2'))

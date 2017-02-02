@@ -37,3 +37,42 @@ set=frozenset([34,423,234])
 dict[set]=43
 print(dict.get(3),dict[set])
 print(len.__doc__)
+def fun(arg1,*,num=3,name,age=3,**kw):
+    print(arg1,name,age)
+    pass
+
+
+fun(23,name="mi")
+dict[(3,3)]=5
+#from . import fun
+#from .. import module1
+#from .. import module2
+# . 代表上次from 位置，..代表.的上级位置
+for x in range(1,10):
+    print(repr(x*x).ljust(3),repr(x*x*x).rjust(4))
+#output control
+print("we are {1},you are {0}".format("knight","NI"))
+print("{this},{that}".format(this="this",that="that"))
+dict={"aaa":1234,"bbb":2222}
+#print('{0[aaa]:d]},{0[bbb]:d}'.format(dict))
+print('{aaa},{bbb}'.format(**dict))
+import math
+print("pi = %5.10f" % math.pi)
+class Myclass(object):
+    def __init__(self):
+        pass
+def changeinfun(var):
+    var.append(34)
+l=[]
+changeinfun(l)
+print(l)
+a=2
+def chang(var):
+    var=3
+chang(a)
+print(a)
+def chang(var):
+    var['fji']=34
+dict={}
+chang(dict)
+print(dict)

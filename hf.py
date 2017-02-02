@@ -12,3 +12,5 @@ a[1]="jfi"
 os.chdir("/")
 print(os.path.abspath('.'))
 print (os.getgid())
+import tcp_server
+
