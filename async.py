@@ -13,9 +13,9 @@ def fun():
 def fun1():
     print("the fun1 start")
     yield from asyncio.sleep(1)
-    print("end")
+    print("fun1 end")
 loop=asyncio.get_event_loop()
-task=[fun(),fun1()]
+task=[fun(),fun1(),fun()]
 loop.run_until_complete(asyncio.wait(task))
 
 print ("all end")

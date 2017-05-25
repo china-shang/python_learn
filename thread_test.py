@@ -56,7 +56,7 @@ def do():
     print(var)
     print("Thread is %s" % (threading.current_thread().name))
 run1=threading.Thread(target=startthread,args=("var1",),name="first")
-run2=threading.Thread(target=startthread,args=("var2",),name="scend")
+run2=threading.Thread(target=startthread,args=("var2",),name="second")
 run1.start()
 run2.start()
 run1.join()

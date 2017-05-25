@@ -7,8 +7,12 @@ def fun(n):
         yield L
         L=[0]+L+[0]
         L=[L[i]+L[i+1] for i in range(len(L)-1)]
-a=fun(10)
-for i in a:
+def fun1(n):
+    while n>=1:
+        yield from fun(n)
+        n=n-1
+for i in fun1(10):
     print(i)
+
 
 
