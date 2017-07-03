@@ -15,4 +15,4 @@ os.chdir("/")
 print(os.path.abspath('.'))
 print(os.getgid())
 import subprocess
-i=subprocess.call('ls')
+print(subprocess.call('ls'))

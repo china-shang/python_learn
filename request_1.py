@@ -3,5 +3,5 @@
 import requests
 from bs4 import BeautifulSoup
 response = requests.get("https://jecvay.com/")
-soup=BeautifulSoup(response.text,"lxml")
+soup = BeautifulSoup(response.text, "lxml")
 print(soup.title.text)

@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
+
+
 def consumer():
     r = ''
     try:
@@ -16,6 +18,7 @@ def consumer():
     finally:
         print("closing")
 
+
 def produce(c):
     print(next(c))
     n = 0
@@ -26,13 +29,20 @@ def produce(c):
         print('[PRODUCER] Consumer return: %s' % r)
     c.close()
 
+
 c = consumer()
 produce(c)
 import asyncio
 
+
+async def fun2():
+    i = await fun()
+    print(i)
+
+
 async def fun():
-    i=await asyncio.sleep(1)
+    i = await asyncio.sleep(1)
+    return 23
 
-loop=asyncio.get_event_loop()
-loop=loop.run_until_complete(fun())
-
+loop = asyncio.get_event_loop()
+loop = loop.run_until_complete(fun2())

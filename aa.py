@@ -3,6 +3,7 @@
 import asyncio
 import struct
 
+
 class EchoServerClientProtocol(asyncio.Protocol):
     def connection_made(self, transport):
         peername = transport.get_extra_info('peername')
@@ -11,16 +12,17 @@ class EchoServerClientProtocol(asyncio.Protocol):
 
     def data_received(self, data):
         #message = data.decode()
-        message = struct.unpack('d',data)
+        message = struct.unpack('d', data)
         #print('Data received: {!r}'.format(message))
-        print('Data received:%d',message)
-        print("send :%d",message)
+        print('Data received:%d', message)
+        print("send :%d", message)
 
         #print('Send: {!r}'.format(message))
         self.transport.write(data)
 
         #print('Close the client socket')
-        #self.transport.close()
+        # self.transport.close()
+
 
 loop = asyncio.get_event_loop()
 # Each client connection will create a new protocol instance
