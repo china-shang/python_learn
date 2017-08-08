@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 # coding=utf-8
 
 import socket
@@ -13,8 +14,9 @@ print("client start")
 s = [b'one', b'two', b'three', b'four', b'five', b'exit']
 
 # print('rec',date.decode('utf-8'))
-for date in range(5):
-    sock.send(struct.pack('d', date))
-
+    #sock.send(struct.pack('d', date))
+while True:
+    sock.send(b'hello')
     date1 = sock.recv(1999)
-    print(date, "recv:", date1)
+
+    print( "recv:", date1)

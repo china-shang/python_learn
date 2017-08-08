@@ -7,7 +7,7 @@ async def Headle(reader, writer):
     while True:
         data = await reader.read(100)
         if not data:
-            break
+            return
         print(data)
         writer.write(data)
         await writer.drain()

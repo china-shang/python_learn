@@ -1,7 +1,13 @@
-#!/usr/bin/env python
-# coding=utf-8
-s = [4, 5]
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import asyncio
 
-import socket
-rsock, wsock = socket.socketpair()
-print(rsock.recv(5))
+loop = asyncio.get_event_loop()
+async def f():
+    return True
+async def ff():
+    if(await f()):
+        print("True")
+loop.run_until_complete(ff())
+
+

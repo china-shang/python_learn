@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+# !/usr/bin/env python
 # coding = utf-8
 
 
@@ -7,7 +7,7 @@ def select(cur):
 
 
 import pymysql
-con = pymysql.Connect(user='root', host='127.0.0.1', database='test', password='123456', charset="utf8"
+con = pymysql.Connect(user='root', host='127.0.0.1', database='mysql', password='123456', charset="utf8"
                       )
 cur = con.cursor()
 cur.execute('select * from books where name=%s OR 1 ; ', ("df",))
@@ -16,18 +16,18 @@ for i in cur.fetchall():
 cur.close()
 # class students(object):
 # def __init__(self, id, name, age):
-#self.name = name
-#self.id = id
-#self.age = age
+# self.name = name
+# self.id = id
+# self.age = age
 # def insert(self, con):
-##sql = "insert into test (id, name, age) values(%s, %s, %s)"
-#cur = con.cursor()
-##cur.execute(sql, (str(self.id), self.name, str(self.age)))
+# #sql = "insert into test (id, name, age) values(%s, %s, %s)"
+# cur = con.cursor()
+# #cur.execute(sql, (str(self.id), self.name, str(self.age)))
 # cur.close()
-#stu = students(123, "new", 10)
+# stu = students(123, "new", 10)
 # stu.insert(con)
-#cur = con.cursor()
-#cur.execute("select * from test ;")
-#r = cur.fetchall()
+# cur = con.cursor()
+# cur.execute("select * from test ;")
+# r = cur.fetchall()
 # for i in r:
 # print(i)

@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+# coding=utf-8
+import scrapy
+from scrapy.selector import Selector
+from tutorial.items import TutorialItem
+
+#红袖天香
+class book_spider(scrapy.Spider):
+    name="book"
+    url_start="http://quanben.hongxiu.com/"
+    #url_mid="quanben"
+    #全本
+    url_mid="qb4_"
+    url_end=".html"
+    page_num=0
+    count=0
+
+
+    def start_requests(self):
+        for i in range(1,2):
+            url=self.url_start+self.url_mid+str(i)+self.url_end
+            yield scrapy.Request(url)
+
+    def parse_book(self,response):
+        item=TutorialItem()
+        sel=Selector(response)
+        for des in sel.xpath('//div/div/div/div/div[@class="con_text"]/h3/text()').extract():
+            item['descr']=des
+        for des in sel.xpath('//div/div/div/div/div[@class="con_text"]/h3/br/text()').extract():
+            item['descr']=item['descr']+des
+        item['book_href']=response.meta['ref']
+        item['name']=response.meta['name']
+        item['author']=response.meta['author']
+        item['book_type']=response.meta['type']
+        yield item
+
+    def parse(self,response):
+        sel=Selector(response)
+        for page_section in sel.xpath('//div[@id="Page"]/ul/li'):
+            page_end=page_section.xpath('.//a/@href').extract()
+            if(len(page_end)==1):
+                print(page_end[0])
+                yield scrapy.Request(self.url_start+page_end[0])
+        for books_section in sel.xpath('//div[@id="lbox"]/ul'):
+                item=TutorialItem()
+                book_type=books_section.xpath('.//li[@class="t5"]/text()').extract()
+                book_name=books_section.xpath('.//li[@class="t3"]/a/text()').extract()
+                book_ref=books_section.xpath('.//li[@class="t3"]/a/@href').extract()
+                book_au=books_section.xpath('.//li[@class="t4"]/a/text()').extract()
+
+                self.count=self.count+1
+
+                print("\n",self.count,"作者：",book_au[0],"\n类型：",book_type[0],"\n  书名：",book_name[0],"\n链接:",book_ref[0])
+
+                yield scrapy.Request(book_ref[0],callback=self.parse_book,meta={'name':book_name[0],'author':book_au[0],'type':book_type[0],'ref':book_ref[0]})
+
+
+

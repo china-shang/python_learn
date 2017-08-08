@@ -9,8 +9,8 @@ async def hello():
     return
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(asyncio.wait([hello()]))
-loop.run_forever()
+#loop.run_until_complete(asyncio.wait([hello()]))
+#loop.run_forever()
 
 import datetime
 
@@ -30,19 +30,20 @@ async def other(future):
     future.set_result("end")
     await asyncio.sleep(1)
 
+
 future = asyncio.Future()
 
 
 # future.add_done_callback(other(future))
-asyncio.ensure_future(other(future))
-# loop.run_until_complete(future)
+# asyncio.ensure_future(other(future))
+loop.run_until_complete(future)
 
 asyncio.wait_for(future, None)
 
 # it will continue run next code in wait time;
 # int above func
 
-loop.run_until_complete(asyncio.sleep(5))
+loop.run_until_complete(asyncio.sleep(2))
 print(future.result())
 
 # task=asyncio.Task(data,loop)
