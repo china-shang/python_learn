@@ -21,8 +21,8 @@ class A(object):
 class B(A):
     def __init__(self, a, b):
         print("this B")
-        self.b = b
         super().__init__(a)
+        self.b = b
 
     def f(self):
         print("this b's f")
@@ -50,7 +50,8 @@ class D(B, C):
     def __init__(self, a, b, c, d):
         print("this D")
         #super(B, self).__init__(a, c)
-        super(D, self).__init__()
+        super(B, self).__init__(a, c)
+        super().__init__(a, b)
 
     def f(self):
         print("this d's f")

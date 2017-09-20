@@ -34,9 +34,8 @@ def Producer():
         with cv:
             if(cout < 10):
                 cout = cout + 1
-                cv.notify()
                 print("Producer:", cout)
-            else:
+            if(cout > 0):
                 cv.notify()
 
 
@@ -47,8 +46,9 @@ def Custom():
         with cv:
             while (cout < 1):
                 cv.wait()
-            cout = cout-1
+            cout = cout - 1
             print("Custom ", cout)
+
 
 def Producer():
     global cv
@@ -60,16 +60,19 @@ def Producer():
                 cv.notify(cout)
                 print("Producer:", cout)
             else:
-                cv.notify()
+                cv.notify(cout)
 
             time.sleep(1)
+
+
 def check():
     global cout
+    print("check")
     if cout > 0:
         return True
-    return False
+    else:
+        return False
 
-        
 
 def Custom():
     global cv
@@ -80,7 +83,7 @@ def Custom():
             cv.wait_for(check)
             print("end wait")
             time.sleep(1)
-            cout = cout-1
+            cout = cout - 1
             print("Custom:", cout)
 
 
@@ -99,6 +102,29 @@ def main():
         time.sleep(100)
     except Exception as e:
         print(e)
+#main()
 
+import asyncio
 
-main()
+q = asyncio.Queue()
+loop = asyncio.get_event_loop()
+
+async def Producer():
+    i = 0
+    while True:
+        i = (i+1)%10
+        if q.qsize() < 10:
+            await q.put(i)
+        await asyncio.sleep(0.3)
+        print("this  Producer:", q.qsize())
+
+async def Custom():
+    while True:
+        i = await q.get()
+        await asyncio.sleep(1)
+        print("this  Custom:", i)
+
+loop.create_task(Producer())
+loop.create_task(Custom())
+loop.run_forever()
+

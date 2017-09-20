@@ -8,7 +8,7 @@ import struct
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.connect(('127.0.0.1', 8888))
 print("client start")
-#print (type(bytes))
+print (type(bytes))
 # num=324
 # sock.send(num.to_bytes(num.bit_length(),"little"))
 s = [b'one', b'two', b'three', b'four', b'five', b'exit']

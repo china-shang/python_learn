@@ -2,6 +2,7 @@
 # coding=utf-8
 import requests
 from bs4 import BeautifulSoup
-response = requests.get("https://jecvay.com/")
+response = requests.get("https://www.baidu.com/")
 soup = BeautifulSoup(response.text, "lxml")
-print(soup.title.text)
+print(response.headers)
+print(response.content)
