@@ -15,7 +15,7 @@ print(encryptText)
 print("解密后")
 print(rsa.decrypt(encryptText, pri).decode())
 
-
+help(OpenSSL.crypto.rsa)
 
 
 

@@ -19,6 +19,7 @@ def server():
     print("server start in port:8888")
     while True:
         sock_accept, addr = sock.accept()
+        print(sock_accept)
         t = threading.Thread(target=tcplink, args=(sock_accept, addr))
         ThreadList.append(t)
         t.start()
@@ -32,6 +33,7 @@ def tcplink(sock_accept, addr):
         print(threading.current_thread().name, "start")
         while True:
             date = sock_accept.recv(1024)
+            sock_accept.send(date)
             if not date or date.decode('utf-8') == 'exit':
                 print("recv exit")
                 sock_accept.close()

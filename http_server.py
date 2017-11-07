@@ -7,5 +7,3 @@ import aiohttp
 import async_timeout
 
 
-help(aiohttp)
-aiohttp.web_server.Server()

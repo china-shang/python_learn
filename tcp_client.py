@@ -15,8 +15,8 @@ s = [b'one', b'two', b'three', b'four', b'five', b'exit']
 
 # print('rec',date.decode('utf-8'))
     #sock.send(struct.pack('d', date))
-while True:
-    sock.send(b'hello')
+for i in s:
+    sock.send(i)
     date1 = sock.recv(1999)
 
     print( "recv:", date1)
