@@ -45,6 +45,7 @@ def Custom():
     while True:
         with cv:
             while (cout < 1):
+                print("waitting")
                 cv.wait()
             cout = cout - 1
             print("Custom ", cout)
@@ -102,29 +103,29 @@ def main():
         time.sleep(100)
     except Exception as e:
         print(e)
-#main()
+main()
 
 import asyncio
 
-q = asyncio.Queue()
-loop = asyncio.get_event_loop()
+#q = asyncio.Queue()
+#loop = asyncio.get_event_loop()
 
-async def Producer():
-    i = 0
-    while True:
-        i = (i+1)%10
-        if q.qsize() < 10:
-            await q.put(i)
-        await asyncio.sleep(0.3)
-        print("this  Producer:", q.qsize())
+#async def Producer():
+    #i = 0
+    #while True:
+        #i = (i+1)%10
+        #if q.qsize() < 10:
+            #await q.put(i)
+        #await asyncio.sleep(0.3)
+        #print("this  Producer:", q.qsize())
 
-async def Custom():
-    while True:
-        i = await q.get()
-        await asyncio.sleep(1)
-        print("this  Custom:", i)
+#async def Custom():
+    #while True:
+        #i = await q.get()
+        #await asyncio.sleep(1)
+        #print("this  Custom:", i)
 
-loop.create_task(Producer())
-loop.create_task(Custom())
-loop.run_forever()
+#loop.create_task(Producer())
+#loop.create_task(Custom())
+#loop.run_forever()
 

@@ -9,14 +9,15 @@ import asyncio
 import async_timeout
 
 
+port=8888
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind(('127.0.0.1', 8888))
+sock.bind(('127.0.0.1', port))
 sock.listen(5)
 
 
 def server():
     ThreadList = []
-    print("server start in port:8888")
+    print("server start in port:",port)
     while True:
         sock_accept, addr = sock.accept()
         print(sock_accept)
@@ -28,18 +29,21 @@ def server():
 def tcplink(sock_accept, addr):
     try:
 
-        sock_accept.send(b'hello')
-
+        sock_accept.send(b"Start------------\n")
         print(threading.current_thread().name, "start")
         while True:
-            date = sock_accept.recv(1024)
+
+            date = sock_accept.recv(2048)
+
+            print("send ",date,"\n")
             sock_accept.send(date)
+            print(date.decode('utf-8'))
+
             if not date or date.decode('utf-8') == 'exit':
-                print("recv exit")
                 sock_accept.close()
                 break
-            print(date)
-            print("rec", date.decode('utf-8'))
+            #sock_accept.close()
+            #break
         print(threading.current_thread().name, "end")
     except BaseException:
         print("error")
@@ -50,6 +54,3 @@ if __name__ == "__main__":
         server()
     except BaseException:
         print("exit")
-# loop=asyncio.get_event_loop()
-# import struct
-# i=struct.pack('hhl',2,2,2)
