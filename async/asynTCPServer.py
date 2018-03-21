@@ -20,7 +20,7 @@ async def handleReader(reader,writer):
         while True:
 
             #await asyncio.sleep(0.3)
-            s=await reader.readline()
+            s=await reader.read(1000)
             print("reading:",s)
             pool[writer]=time.time()
 
@@ -65,10 +65,10 @@ async def checkDeadConnection():
 
     global pool
     while True:
-        await asyncio.sleep(3)
+        await asyncio.sleep(2)
         nowTimer=time.time()
 
-        for i in list(pool):
+        for i in pool:
             lastTime=pool[i]
             if(nowTimer-lastTime>3):
                 i.close()
@@ -77,7 +77,7 @@ async def checkDeadConnection():
 
 pool=dict()
 loop=asyncio.get_event_loop()
-coro=asyncio.start_server(ConnectionCallBack,"127.0.0.1",8888,loop=loop)
+coro=asyncio.start_server(ConnectionCallBack,"127.0.0.1",8889,loop=loop)
 
 asyncio.ensure_future(checkDeadConnection())
 server=loop.run_until_complete(coro)

@@ -11,8 +11,10 @@ async def sleep(timeout):
     f = asyncio.Future()
     loop.call_later(timeout, doNothing, f)
     print(await f)
+    print(await testReturn())
 
-    
+async def testReturn():
+    return "True"
 
 async def test():
     await sleep(1)

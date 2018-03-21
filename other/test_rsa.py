@@ -75,10 +75,12 @@ cipher=AES.new(
 cipher1=AES.new(
     "1234567890abcdef",AES.MODE_CFB,b'1234567890abcdef'
     )
-help(AES.new)
 
 msg=b'how are you!'
 msg1=cipher.encrypt(msg)
+
+print("加密后:",msg1)
+
 msg2=cipher1.decrypt(msg1)
 
 print(msg2.decode())
