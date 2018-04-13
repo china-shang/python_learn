@@ -7,10 +7,10 @@ def select(cur):
 
 
 import pymysql
-con = pymysql.Connect(user='root', host='127.0.0.1', database='mysql', password='123456', charset="utf8"
+con = pymysql.Connect(user='root', host='127.0.0.1', database='qqzone', password='123456', charset="utf8"
                       )
 cur = con.cursor()
-cur.execute('select * from books where name=%s OR 1 ; ', ("df",))
+cur.execute('select * from reply where   1 ; ')
 for i in cur.fetchall():
     print(i)
 cur.close()
