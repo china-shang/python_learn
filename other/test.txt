@@ -1,3 +1,0 @@
-cat 
-a.sh 
-a.py

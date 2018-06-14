@@ -3,7 +3,7 @@
 import asyncio
 
 
-async def Headle(reader, writer):
+async def handle(reader, writer):
     while True:
         #data = await reader.read(100)
         try:
@@ -18,6 +18,6 @@ async def Headle(reader, writer):
     await writer.drain()
     writer.close()
 loop = asyncio.get_event_loop()
-coro = asyncio.start_server(Headle, '127.0.0.1', 8888, loop=loop)
+coro = asyncio.start_server(handle, '127.0.0.1', 8888, loop=loop)
 server = loop.run_until_complete(coro)
 loop.run_forever()

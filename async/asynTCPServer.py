@@ -68,11 +68,11 @@ async def checkDeadConnection():
         await asyncio.sleep(2)
         nowTimer=time.time()
 
-        for i in pool:
+        for i in list(pool):
             lastTime=pool[i]
             if(nowTimer-lastTime>3):
                 i.close()
-                del pool[i]
+                pool.pop(i)
                 print("DeadConnect ")
 
 pool=dict()
